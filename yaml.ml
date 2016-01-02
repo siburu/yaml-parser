@@ -17,17 +17,17 @@ let rec output_value outc = function
 and print_map outc obj =
   output_string outc "{ ";
   let sep = ref "" in
-  List.iter ~f:(fun (k, v) ->
+  List.iter obj ~f:(fun (k, v) ->
       printf "%s%a : %a" !sep output_value k output_value v;
-      sep := ",\n  ") obj;
+      sep := ",\n  ");
   output_string outc " }"
 
 and print_seq outc arr =
   output_string outc "[";
-  List.iteri ~f:(fun i v ->
+  List.iteri arr ~f:(fun i v ->
       if i > 0 then
         output_string outc ", ";
-      output_value outc v) arr;
+      output_value outc v);
   output_string outc "]"
 
 let output_elem outc = function
